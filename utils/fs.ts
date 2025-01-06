@@ -1,14 +1,14 @@
 import fs from 'fs';
 
-export const readFile = (file: string) => {
+export const readFile = (file: string, raw: boolean = false) => {
   try {
     const data = fs.readFileSync(file, 'utf8').toString();
-    const input = data
+    if (raw) return data;
+
+    return data
       .split('\n')
       .filter(Boolean) // remove empty lines
-      .join('\n');
-
-    return input;
+      .join('\n'); 
   }
 
   catch (e: any) {
